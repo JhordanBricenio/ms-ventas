@@ -1,0 +1,40 @@
+version: '3'
+services:
+  ### Posgres database for Inventory
+  db-inventory:
+    container_name: db-inventory
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ms_inventory
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Test123
+    ports:
+      - "5431:5432"
+
+
+    ### MySQL database for Orders
+  db-orders:
+    container_name: db-orders
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ms_orders
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Test123
+      MYSQL_ROOT_PASSWORD: root  # Asegúrate de usar una contraseña segura en producción
+    ports:
+      - "3308:3306"  # Publica el puerto 3306 del contenedor en el host
+
+
+  ### Posgres database for Products
+  db-products:
+    container_name: db-products
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ms_products
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Test123
+    ports:
+      - "5430:5432"  # Mapear puerto 5432 del host al contenedor
